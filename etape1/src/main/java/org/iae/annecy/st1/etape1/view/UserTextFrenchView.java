@@ -5,7 +5,10 @@
 package org.iae.annecy.st1.etape1.view;
 
 import org.iae.annecy.st1.common.mvc.DataView;
+
 import org.iae.annecy.st1.common.mvc.StringView;
+import org.iae.annecy.st1.etape1.model.produit.Catalogue;
+
 
 /**
  * Permet une representation textuel d'un utilisateur.
@@ -22,6 +25,8 @@ public class UserTextFrenchView implements StringView {
 		final String textView = "Votre nom : " + datas.getData("name");
 
 		return textView;
+		
 	}
+
 
 }
