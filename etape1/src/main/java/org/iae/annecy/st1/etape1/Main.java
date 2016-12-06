@@ -55,39 +55,47 @@ public class Main {
 		Produit produit1 =new Produit("PR01", "Skovna","Chaise", "Dossier en cuir matelassé", 34.00);
 		Produit produit2 = new Produit ("PR02", "Brotsk","Table","Table en carbone", 65.00);
 		Catalogue catalogueProduit = new Catalogue();
-		AnnuaireClient annuairedesClients= new AnnuaireClient();
-		
-		
-		
+		AnnuaireClient annuaireClients= new AnnuaireClient();
+				
      	try{
-			FileInputStream fout = new FileInputStream("catalogue.txt");
-			//FileInputStream fout2 = new FileInputStream("annuaire.txt");
-			ObjectInputStream object = new ObjectInputStream(fout);
-			//ObjectInputStream o2 = new ObjectInputStream(fout2);
+			FileInputStream fis = new FileInputStream("catalogue.txt");
+			ObjectInputStream object = new ObjectInputStream(fis);
 			catalogueProduit = (Catalogue) object.readObject();
-			//a1 = (Annuaire) o2.readObject();
-			//o2.close();
 			object.close();
-			fout.close();
-			//sfout2.close();
+			fis.close();
+			FileInputStream fis2 = new FileInputStream("annuaireClient.txt");
+			ObjectInputStream ois2 = new ObjectInputStream(fis2);
+			annuaireClients = (AnnuaireClient) ois2.readObject();
+			ois2.close();
+			fis2.close();
 		}catch(FileNotFoundException e){
-			
-			//System.out.println("le fichier est vide !!");
-			
-			
 			catalogueProduit.ajouterProduit(produit1);
 			catalogueProduit.ajouterProduit(produit2);
 			
 		}catch(IOException e){
 			System.out.println(e);
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+     	/*try{
+			FileInputStream fis2 = new FileInputStream("annuaireClient.txt");
+			ObjectInputStream object2 = new ObjectInputStream(fis2);
+			annuaireClients = (AnnuaireClient) object2.readObject();
+			object2.close();
+			fis2.close();
+		}catch(FileNotFoundException e){
+			catalogueProduit.ajouterProduit(produit1);
+			catalogueProduit.ajouterProduit(produit2);
+			
+		}catch(IOException e){
+			System.out.println(e);
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}*/
+
      	
 		
-		Menu m = new Menu(catalogueProduit, annuairedesClients);
+		Menu m = new Menu(catalogueProduit, annuaireClients);
 		System.out.println(catalogueProduit.afficherProduits());
 		m.afficherMenu();
 	

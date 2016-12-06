@@ -128,7 +128,6 @@ public class Menu {
 	         oos.close();
 	         fos.close();
 	       }catch(IOException ioe){
-	           //System.out.println(ioe.getMessage()); 
 	    	   System.out.println(ioe);
 		}
 	}
@@ -155,6 +154,16 @@ public class Menu {
 		Client monClient = new Client(idClient, nom, prenom, codePromotionnel);
 		System.out.println("Le nouveau client a le numéro "+ monClient.getID() + ", son nom est " + monClient.getNom() + ", son prénom est "+monClient.getPrenom()+ "et il dispose des codes promotionnels " + monClient.getCodePromotionnel());
 		this.getAnnuaireClient().ajouterClient(monClient);
+		
+		try{
+			FileOutputStream fos2 = new FileOutputStream("annuaireClient.txt");
+			ObjectOutputStream oos2= new ObjectOutputStream(fos2);
+	         oos2.writeObject(this.cat);
+	         oos2.close();
+	         fos2.close();
+	       }catch(IOException ioe){
+	    	   System.out.println(ioe);
+		}
 	}
 	
 	public void modifierAttributClient(){
