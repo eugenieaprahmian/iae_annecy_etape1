@@ -6,12 +6,15 @@ package org.iae.annecy.st1.etape1;
 
 
 import java.io.ObjectInputStream;
-import java.util.Scanner;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import org.iae.annecy.st1.common.mvc.DataView;
 import org.iae.annecy.st1.common.mvc.StringView;
 import org.iae.annecy.st1.etape1.controller.CatalogueController;
 import org.iae.annecy.st1.etape1.controller.MainController;
 import org.iae.annecy.st1.etape1.model.UserModel;
+import org.iae.annecy.st1.etape1.model.produit.AnnuaireClient;
 import org.iae.annecy.st1.etape1.model.produit.Catalogue;
 import org.iae.annecy.st1.etape1.model.produit.Menu;
 import org.iae.annecy.st1.etape1.model.produit.Produit;
@@ -49,31 +52,54 @@ public class Main {
 
 		//ConsoleHelper.display(userView.build(userData));
 		
-		Produit p1, p2;
-		p1 =new Produit("PR01", "Skovna","Chaise", "Dossier en cuir matelassé", 34.00);
-		p2 = new Produit ("PR02", "Brotsk","Table","Table en carbone", 65.00);
-		Catalogue catalogue = new Catalogue();
-		catalogue.ajouterProduit(p1);
-		catalogue.ajouterProduit(p2);
+		Produit produit1 =new Produit("PR01", "Skovna","Chaise", "Dossier en cuir matelassé", 34.00);
+		Produit produit2 = new Produit ("PR02", "Brotsk","Table","Table en carbone", 65.00);
+		Catalogue catalogueProduit = new Catalogue();
+		AnnuaireClient annuairedesClients= new AnnuaireClient();
 		
-		Menu m = new Menu(catalogue);
-		System.out.println(catalogue.afficherProduits());
+		
+		
+     	try{
+			FileInputStream fout = new FileInputStream("catalogue.txt");
+			//FileInputStream fout2 = new FileInputStream("annuaire.txt");
+			ObjectInputStream object = new ObjectInputStream(fout);
+			//ObjectInputStream o2 = new ObjectInputStream(fout2);
+			catalogueProduit = (Catalogue) object.readObject();
+			//a1 = (Annuaire) o2.readObject();
+			//o2.close();
+			object.close();
+			fout.close();
+			//sfout2.close();
+		}catch(FileNotFoundException e){
+			
+			//System.out.println("le fichier est vide !!");
+			
+			
+			catalogueProduit.ajouterProduit(produit1);
+			catalogueProduit.ajouterProduit(produit2);
+			
+		}catch(IOException e){
+			System.out.println(e);
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+     	
+		
+		Menu m = new Menu(catalogueProduit, annuairedesClients);
+		System.out.println(catalogueProduit.afficherProduits());
 		m.afficherMenu();
 	
-		/*try{
-			File fichier = new File("desktop");
-			ObjectInputStream ios = new ObjectInputStream (new FileInputStream (fichier));
-			catalogue = new Catalogue();
-		}*/
 		/*
 		CatalogueController catController = new CatalogueController(catalogue);
 		System.out.println(catController.get());
 		
 	private static void initUserModel() {
 		final UserModel userModel = new UserModel();
-		userModel.register(mainController);
+		userModel.register(mainController);*/
 		
-	*/
+	
 	}
 	
 }

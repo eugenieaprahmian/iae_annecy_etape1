@@ -3,10 +3,11 @@ package org.iae.annecy.st1.etape1.model.produit;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public class Catalogue {
+public class Catalogue implements Serializable {
 		private ArrayList <Produit> produits = new ArrayList <Produit>();
 		public ArrayList <Produit> getProduits(){
 			return this.produits;
@@ -14,26 +15,15 @@ public class Catalogue {
 		public void ajouterProduit (Produit produit){
 			this.getProduits().add(produit);
 			}
-		public String afficherProduits(){//ajouter désérialisation
-			try
-		        {
-		            FileInputStream fis = new FileInputStream("serializedcatalogue");
-		            ObjectInputStream ois = new ObjectInputStream(fis);
-		            ois.close();
-		            fis.close();
-		         }catch(IOException ioe){
-		             System.out.println("Le fichier n'existe pas");             
-		          }
-		        for(Produit tmp: produits){
-		            System.out.println(tmp);
-		        }
+		public String afficherProduits(){
+			
 		
 			String texte="";
 			int count = 1;
 				for (Produit produit : this.produits){
-				texte += count++ +" [ "+"Reférence : "+produit.getReference() + " - Nom : "+produit.getNom()
+				texte += count++ +"[ "+"Reférence : "+produit.getReference() + " - Nom : "+produit.getNom()
 				+" - Description : "+produit.getDescription() + " - Description longue : "+produit.getDescriptionLongue()
-				+" - Prix : "+produit.getPrix()+"] \n";
+				+" - Prix : "+produit.getPrix()+" ] \n";
 				}
 				return texte;
 				 
