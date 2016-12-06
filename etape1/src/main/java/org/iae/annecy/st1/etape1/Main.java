@@ -70,8 +70,8 @@ public class Main {
 			fis2.close();
 			
 		}catch(FileNotFoundException e){
-			//catalogueProduit.ajouterProduit(produit1);
-			//catalogueProduit.ajouterProduit(produit2);
+			catalogueProduit.ajouterProduit(produit1);
+			catalogueProduit.ajouterProduit(produit2);
 			
 		}catch(IOException e){
 			System.out.println(e);
