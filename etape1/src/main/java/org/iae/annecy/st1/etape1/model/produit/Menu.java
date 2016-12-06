@@ -201,6 +201,15 @@ public class Menu {
 			System.out.println("Le client référencé par " + monClient.getID()+ " a le nouveau code promotionnel "+ monClient.getCodePromotionnel());
 			
 		}
+		try{
+			FileOutputStream fos2 = new FileOutputStream("annuaireClient.txt");
+			ObjectOutputStream oos2= new ObjectOutputStream(fos2);
+	         oos2.writeObject(this.cat);
+	         oos2.close();
+	         fos2.close();
+	       }catch(IOException ioe){
+	    	   System.out.println(ioe);
+		}
 		
 		
 	}

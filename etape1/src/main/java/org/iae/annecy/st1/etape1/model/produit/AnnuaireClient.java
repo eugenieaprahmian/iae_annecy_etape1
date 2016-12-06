@@ -1,9 +1,10 @@
 package org.iae.annecy.st1.etape1.model.produit;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public class AnnuaireClient {
+public class AnnuaireClient implements Serializable{
 	
 	private ArrayList <Client> clients = new ArrayList <Client>();
 	public ArrayList <Client> getClients(){

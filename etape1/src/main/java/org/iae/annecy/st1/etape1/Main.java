@@ -63,10 +63,15 @@ public class Main {
 			catalogueProduit = (Catalogue) object.readObject();
 			object.close();
 			fis.close();
+			FileInputStream fis2 = new FileInputStream("annuaireClient.txt");
+			ObjectInputStream ois2 = new ObjectInputStream(fis2);
+			annuaireClients = (AnnuaireClient) ois2.readObject();
+			ois2.close();
+			fis2.close();
 			
 		}catch(FileNotFoundException e){
-			catalogueProduit.ajouterProduit(produit1);
-			catalogueProduit.ajouterProduit(produit2);
+			//catalogueProduit.ajouterProduit(produit1);
+			//catalogueProduit.ajouterProduit(produit2);
 			
 		}catch(IOException e){
 			System.out.println(e);
@@ -87,7 +92,7 @@ public class Main {
 			System.out.println(e);
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
-		}*/
+		}*\
 
      	
 		
