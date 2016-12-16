@@ -13,7 +13,7 @@ import java.util.Scanner;
  */
 public final class ConsoleHelper {
 
-	private ConsoleHelper() {
+	public ConsoleHelper() {
 
 	}
 
